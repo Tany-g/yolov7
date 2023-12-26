@@ -1,0 +1,13 @@
+train: /home/ubuntu/DataSet/SB2/train/images
+val: /home/ubuntu/DataSet/SB2/test/images
+test: /home/ubuntu/DataSet/SB2/test/images
+
+nc: 1
+names: ['solder ball']
+
+roboflow:
+  workspace: tan-yang-brwh3
+  project: sb-qumb1
+  version: 4
+  license: MIT
+  url: https://universe.roboflow.com/tan-yang-brwh3/sb-qumb1/dataset/4

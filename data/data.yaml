@@ -1,0 +1,6 @@
+train: /home/ubuntu/DataSet/sb_dataset/train/images
+val: /home/ubuntu/DataSet/sb_dataset/valid/images
+test: /home/ubuntu/DataSet/sb_dataset/valid/images
+
+nc: 1
+names: ['solder ball']
