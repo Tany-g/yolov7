@@ -11,7 +11,7 @@ from models.experimental import attempt_load
 from utils.datasets import LoadStreams, LoadImages
 from utils.general import check_img_size, check_requirements, check_imshow, non_max_suppression, apply_classifier, \
     scale_coords, xyxy2xywh, strip_optimizer, set_logging, increment_path
-from utils.plots import plot_one_box
+from utils.plots import plot_one_box, plot_one_box_PIL
 from utils.torch_utils import select_device, load_classifier, time_synchronized, TracedModel
 
 
@@ -57,7 +57,17 @@ def detect(save_img=False):
         dataset = LoadImages(source, img_size=imgsz, stride=stride)
 
     # Get names and colors
-    names = model.module.names if hasattr(model, 'module') else model.names
+    # names = model.module.names if hasattr(model, 'module') else model.names
+    names = ['行人', '自行车', '汽车', '摩托车', '飞机', '公共汽车', '火车', '卡车', '船', '红绿灯',
+'消防栓', '停车标志', '停车收费表', '长椅', '鸟', '猫', '狗', '马', '羊', '牛',
+'大象', '熊', '斑马', '长颈鹿', '背包', '雨伞', '手提包', '领带', '手提箱', '飞盘',
+'滑雪板', '雪板', '运动球', '风筝', '棒球棒', '棒球手套', '滑板', '冲浪板',
+'网球拍', '瓶子', '酒杯', '杯子', '叉子', '刀', '勺子', '碗', '香蕉', '苹果',
+'三明治', '橙子', '西兰花', '胡萝卜', '热狗', '比萨', '甜甜圈', '蛋糕', '椅子', '沙发',
+'盆栽', '床', '餐桌', '马桶', '电视', '笔记本电脑', '鼠标', '遥控器', '键盘', '手机',
+'微波炉', '烤箱', '烤面包机', '水槽', '冰箱', '书', '时钟', '花瓶', '剪刀', '泰迪熊',
+'吹风机', '牙刷']
+
     colors = [[random.randint(0, 255) for _ in range(3)] for _ in names]
 
     # Run inference
@@ -126,8 +136,8 @@ def detect(save_img=False):
 
                     if save_img or view_img:  # Add bbox to image
                         label = f'{names[int(cls)]} {conf:.2f}'
+                        # im0 = plot_one_box_PIL(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
                         plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
-
             # Print time (inference + NMS)
             print(f'{s}Done. ({(1E3 * (t2 - t1)):.1f}ms) Inference, ({(1E3 * (t3 - t2)):.1f}ms) NMS')
 
